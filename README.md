@@ -1,4 +1,3 @@
-```markdown
 # STARS-Gateway: Stateless Traffic Absorption & Resource-Sink
 
 [![Rust](https://img.shields.io/badge/Rust-1.75%2B-orange)](https://www.rust-lang.org)
@@ -27,63 +26,64 @@ STARS-Gateway is an experimental edge traffic governance framework that replaces
 - Rust 1.75 or newer (install via rustup)
 
 ### Build and Run
-”“bash
+```bash
 git clone https://github.com/L1064709321/stars-gateway.git
 cd stars-gateway
 
-货物建造—放行
+cargo build --release
 
-sudo。/target/release/stars-gateway——mode sink——bind 0.0.0.0:9999
+sudo ./target/release/stars-gateway --mode sink --bind 0.0.0.0:9999
 ```
+# Test with slowhttptest
 
-###使用slowhttptest测试
-”“bash
-slowttptest -c 500 -H -g -o报告-i 10 -r 200 -t GET -u http://127.0.0.1:9999
+```bash
+slowhttptest -c 500 -H -g -o report -i 10 -r 200 -t GET -u http://127.0.0.1:9999
 ```
+# Observe that:
 
-观察到:
-—攻击客户端挂起，最终超时。
-- stars-gateway进程的本地CPU使用率仍然很低（低于5%）。
-—接收端口（ss -ntp | grep 9999）的连接保持ESTABLISHED状态。
+· The attacking client hangs, eventually timing out.
+· Local CPU usage of the stars-gateway process remains low (under 5 percent).
+· Connections stay ESTABLISHED on the sink port (ss -ntp | grep 9999).
 
-项目结构
+# Project Structure
 
 ```
 stars-gateway/
-├──ebpf/ # XDP滤镜（设计阶段）
+├── ebpf/                   # XDP filter (design phase)
 │   ├── include/
-我愿……
-││├──filter_xdp.c
-│Makefile
+│   ├── progs/
+│   │   └── filter_xdp.c
+│   └── Makefile
 ├── src/
-│├──sink/ # Tarpit引擎实现
-我的意思是：
+│   ├── sink/               # Tarpit engine implementation
+│   │   ├── mod.rs
 │   │   └── tarpit.rs
-│├──├─rammstein（设计阶段）
-mod.rs
+│   ├── pulse/              # Gossip sync (design phase)
+│   │   └── mod.rs
 │   └── main.rs
-├──docs/ # RFC和架构注释
+├── docs/                   # RFC and architectural notes
 ├── Cargo.toml
 └── README.md
 ```
 
-# #命名
+# Naming
 
-STARS代表无状态流量吸收和资源吸收。该名称还反映了预期的星座拓扑，其中每个边缘节点充当一个独立的“星”。是的，我是星爵。
+STARS stands for Stateless Traffic Absorption & Resource-Sink. The name also reflects the intended constellation topology where each edge node acts as an independent "star". Yes, I'm the Star Lord.
 
-# #路线图
+# Roadmap
 
-- [x]单节点tarpit引擎（STARS-Sink）
-- [] eBPF XDP流量分类器（STARS-Filter）
-- [] SWIM八卦会员（STARS-Pulse）
--[]基于crdt的签名传播
-- [] Kubernetes DaemonSet部署清单
+· Single-node tarpit engine (STARS-Sink)
+· eBPF XDP traffic classifier (STARS-Filter)
+· SWIM gossip membership (STARS-Pulse)
+· CRDT-based signature propagation
+· Kubernetes DaemonSet deployment manifests
 
-# #贡献
+# Contributing
 
-该项目处于早期概念验证阶段。Bug报告，想法和讨论欢迎通过问题。请注意，大型特性发布可能会推迟到核心架构稳定之后。
+This project is in early proof-of-concept stage. Bug reports, ideas, and discussions are welcome via Issues. Please note that large feature PRs may be deferred until the core architecture stabilizes.
 
-# #许可证
+# License
 
-Apache 2.0。看到许可证。
+Apache 2.0. See LICENSE.
+
 ```
