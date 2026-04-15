@@ -5,11 +5,11 @@
 - Tokio（异步运行时）  
 - HTTP/1.1（网络协议）  
 ## 快速开始  
-1. 克隆仓库：  
-   ```bash
+1. 克隆仓库：
+   bash
    git clone https://github.com/L1064709321/stars-gateway.git
    cd stars-gateway
-2. 运行项目：
+3. 运行项目：
    cargo run
 文件结构
 src/main.rs：项目入口，启动网关服务。
