@@ -15,9 +15,9 @@ STARS-Gateway is an experimental edge traffic governance framework that replaces
 
 | Module | Status | Description |
 | :--- | :--- | :--- |
-| **STARS-Sink** | ✅ Implemented | Async tarpit engine. Responds to clients with exponentially delayed 1-byte payloads. Consumes attacker's file descriptors and event loop capacity while using less than 5% local CPU. |
-| **STARS-Filter** | 🚧 Design | eBPF/XDP in-kernel classifier. Routes suspicious flows to the sink without touching user-space network stack. |
-| **STARS-Pulse** | 💡 Design | SWIM-based gossip protocol for decentralized signature propagation across edge nodes. |
+| **STARS-Sink** | Implemented | Async tarpit engine. Responds to clients with exponentially delayed 1-byte payloads. Consumes attacker's file descriptors and event loop capacity while using less than 5% local CPU. |
+| **STARS-Filter** | Design | eBPF/XDP in-kernel classifier. Routes suspicious flows to the sink without touching user-space network stack. |
+| **STARS-Pulse** | Design | SWIM-based gossip protocol for decentralized signature propagation across edge nodes. |
 
 ## 环境要求与安装
 
@@ -96,10 +96,10 @@ slowhttptest -c 500 -H -g -o report -i 10 -r 200 -t GET -u http://127.0.0.1:9999
 · 陷阱端口上连接保持 ESTABLISHED 状态 (ss -ntp | grep 9999)。
 
 # 项目结构
-
 ```
-stars-gateway/
-├── Cargo.toml
+
+ stars-gateway/
+ ── Cargo.toml
 ├── src/
 │   └── main.rs
 ├── docs/                   # RFC and architectural notes
@@ -108,7 +108,7 @@ stars-gateway/
 
 # 版本说明
 
-· v0.1.0：极简原型，仅支持 HTTP 慢速陷阱，已验证不对称消耗可行性。
+*   **v0.1.0**：极简原型，仅支持 HTTP 慢速陷阱，已验证不对称消耗可行性。
 后续版本规划请见ROADMAP.md
 # Naming
 
@@ -116,11 +116,11 @@ STARS stands for Stateless Traffic Absorption & Resource-Sink. The name also ref
 
 # Roadmap
 
-· Single-node tarpit engine (STARS-Sink)
-· eBPF XDP traffic classifier (STARS-Filter)
-· SWIM gossip membership (STARS-Pulse)
-· CRDT-based signature propagation
-· Kubernetes DaemonSet deployment manifests
+*   Single-node tarpit engine (STARS-Sink)
+*   eBPF XDP traffic classifier (STARS-Filter)
+*   SWIM gossip membership (STARS-Pulse)
+*   CRDT-based signature propagation
+*   Kubernetes DaemonSet deployment manifests
 
 # Contributing
 
